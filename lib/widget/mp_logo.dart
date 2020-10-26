@@ -18,14 +18,6 @@ class MPLogo extends StatelessWidget {
             color: Theme.of(context).primaryColor,
           ),
         ),
-        TextSpan(
-          text: ' ADMIN',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-            color: Theme.of(context).primaryColor,
-          ),
-        ),
       ]),
     );
   }

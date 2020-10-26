@@ -1,0 +1,1 @@
+class ClienteInvalidoException implements Exception {}

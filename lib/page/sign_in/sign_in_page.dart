@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:my_place/exceptions/exceptions.dart';
 import 'package:my_place/widget/mp_loading.dart';
 
+import '../../exceptions/exceptions.dart';
 import '../../widget/mp_logo.dart';
-import '../home/home_page.dart';
 import '../sign_up/sign_up_page.dart';
 import 'sign_in_controller.dart';
 
@@ -77,11 +77,11 @@ class _SignInPageState extends State<SignInPage> {
                                   final user = await _controller.fazLogin();
                                   Navigator.of(context).pushAndRemoveUntil(
                                     MaterialPageRoute(
-                                      builder: (_) => HomePage(user),
+                                      builder: (_) => Container(),
                                     ),
                                     (Route<dynamic> route) => false,
                                   );
-                                } on UsuarioNaoEncontradoException {} on SenhaErradaException {} on EmailInvalidoException {} on Exception {} finally {
+                                } on UsuarioNaoEncontradoException {} on SenhaErradaException {} on EmailInvalidoException {} on ClienteInvalidoException {} on Exception {} finally {
                                   setState(() {
                                     _controller.setIsLoading(false);
                                   });
