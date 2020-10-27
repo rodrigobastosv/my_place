@@ -4,6 +4,9 @@ import 'package:my_place/model/usuario_model.dart';
 import 'package:my_place/page/home/home_controller.dart';
 import 'package:my_place/page/home/widget/promocoes.dart';
 
+import '../../widget/mp_appbar.dart';
+import '../../widget/mp_logo.dart';
+
 class HomePage extends StatefulWidget {
   HomePage(this.user);
 
@@ -26,22 +29,32 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            FutureBuilder<List<PromocaoModel>>(
-              future: futurePromocoes,
-              builder: (_, snapshot) {
-                if (snapshot.hasData) {
-                  return Promocoes(snapshot.data);
-                } else {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              },
-            ),
-          ],
+      appBar: MPAppBar(
+        title: MPLogo(
+          fontSize: 24,
+        ),
+        withLeading: false,
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              FutureBuilder<List<PromocaoModel>>(
+                future: futurePromocoes,
+                builder: (_, snapshot) {
+                  if (snapshot.hasData) {
+                    return Promocoes(snapshot.data);
+                  } else {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
