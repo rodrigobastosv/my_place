@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_place/exceptions/exceptions.dart';
+import 'package:my_place/page/home/home_page.dart';
 import 'package:my_place/widget/mp_loading.dart';
 
 import '../../exceptions/exceptions.dart';
@@ -77,7 +78,7 @@ class _SignInPageState extends State<SignInPage> {
                                   final user = await _controller.fazLogin();
                                   Navigator.of(context).pushAndRemoveUntil(
                                     MaterialPageRoute(
-                                      builder: (_) => Container(),
+                                      builder: (_) => HomePage(user),
                                     ),
                                     (Route<dynamic> route) => false,
                                   );
