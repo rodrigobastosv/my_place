@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:my_place/model/categoria_model.dart';
 import 'package:my_place/model/promocao_model.dart';
 import 'package:my_place/model/usuario_model.dart';
+import 'package:my_place/page/carrinho/carrinho_controller.dart';
+import 'package:my_place/page/carrinho/carrinho_page.dart';
 import 'package:my_place/page/home/home_controller.dart';
 import 'package:my_place/page/home/widget/promocoes.dart';
+import 'package:provider/provider.dart';
 
 import '../../widget/mp_appbar.dart';
 import '../../widget/mp_logo.dart';
 import 'widget/categorias.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage(this.user);
-
-  final UsuarioModel user;
-
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -37,6 +36,22 @@ class _HomePageState extends State<HomePage> {
         title: MPLogo(
           fontSize: 24,
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add_shopping_cart),
+            onPressed: () {
+              final usuario = Provider.of<UsuarioModel>(context, listen: false);
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => Provider.value(
+                    value: Provider.of<CarrinhoController>(context),
+                    child: CarrinhoPage(usuario),
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
         withLeading: false,
       ),
       body: SingleChildScrollView(

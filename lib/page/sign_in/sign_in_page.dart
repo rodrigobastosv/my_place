@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:my_place/exceptions/exceptions.dart';
+import 'package:my_place/model/usuario_model.dart';
+import 'package:my_place/page/carrinho/carrinho_controller.dart';
 import 'package:my_place/page/home/home_page.dart';
 import 'package:my_place/widget/mp_loading.dart';
+import 'package:provider/provider.dart';
 
 import '../../exceptions/exceptions.dart';
 import '../../widget/mp_logo.dart';
@@ -75,10 +78,16 @@ class _SignInPageState extends State<SignInPage> {
                                 });
                                 form.save();
                                 try {
-                                  final user = await _controller.fazLogin();
+                                  final usuario = await _controller.fazLogin();
                                   Navigator.of(context).pushAndRemoveUntil(
                                     MaterialPageRoute(
-                                      builder: (_) => HomePage(user),
+                                      builder: (_) => Provider<UsuarioModel>(
+                                        create: (_) => usuario,
+                                        child: Provider<CarrinhoController>(
+                                          create: (_) => CarrinhoController(usuario),
+                                          child: HomePage(),
+                                        ),
+                                      ),
                                     ),
                                     (Route<dynamic> route) => false,
                                   );

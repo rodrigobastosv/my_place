@@ -27,7 +27,7 @@ class SignInController {
         password: _senha,
       );
       final userFirestore = await _usersRef.doc(userFireAuth.user.uid).get();
-      final user = UsuarioModel.fromJson(userFirestore.data());
+      final user = UsuarioModel.fromJson(userFirestore.id, userFirestore.data());
       if (user.tipo != 'CLIENTE') {
         throw ClienteInvalidoException();
       }

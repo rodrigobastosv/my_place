@@ -1,8 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:my_place/model/categoria_model.dart';
+import 'package:my_place/page/carrinho/carrinho_controller.dart';
 import 'package:my_place/page/produtos_por_categoria/produtos_por_categoria_page.dart';
 import 'package:my_place/widget/mp_title.dart';
+import 'package:provider/provider.dart';
 
 class Categorias extends StatelessWidget {
   Categorias(this.categorias);
@@ -28,7 +30,10 @@ class Categorias extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (_) => ProdutosPorCategoriaPage(categoria),
+                        builder: (_) => Provider.value(
+                          value: Provider.of<CarrinhoController>(context),
+                          child: ProdutosPorCategoriaPage(categoria),
+                        ),
                       ),
                     );
                   },
