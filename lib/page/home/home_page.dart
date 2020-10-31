@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:my_place/model/categoria_model.dart';
-import 'package:my_place/model/promocao_model.dart';
-import 'package:my_place/model/usuario_model.dart';
-import 'package:my_place/page/carrinho/carrinho_controller.dart';
-import 'package:my_place/page/carrinho/carrinho_page.dart';
-import 'package:my_place/page/home/home_controller.dart';
-import 'package:my_place/page/home/widget/promocoes.dart';
 import 'package:provider/provider.dart';
 
+import '../../model/categoria_model.dart';
+import '../../model/promocao_model.dart';
+import '../../model/usuario_model.dart';
 import '../../widget/mp_appbar.dart';
+import '../../widget/mp_button_icon.dart';
+import '../../widget/mp_loading.dart';
 import '../../widget/mp_logo.dart';
+import '../carrinho/carrinho_controller.dart';
+import '../carrinho/carrinho_page.dart';
+import 'home_controller.dart';
 import 'widget/categorias.dart';
+import 'widget/promocoes.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -37,9 +39,9 @@ class _HomePageState extends State<HomePage> {
           fontSize: 24,
         ),
         actions: [
-          IconButton(
-            icon: Icon(Icons.add_shopping_cart),
-            onPressed: () {
+          MPButtonIcon(
+            iconData: Icons.shopping_cart,
+            onTap: () {
               final usuario = Provider.of<UsuarioModel>(context, listen: false);
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -66,21 +68,18 @@ class _HomePageState extends State<HomePage> {
                   if (snapshot.hasData) {
                     return Promocoes(snapshot.data);
                   } else {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return MPLoading();
                   }
                 },
               ),
+              const SizedBox(height: 24),
               FutureBuilder<List<CategoriaModel>>(
                 future: futureCategorias,
                 builder: (_, snapshot) {
                   if (snapshot.hasData) {
                     return Categorias(snapshot.data);
                   } else {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return MPLoading();
                   }
                 },
               ),

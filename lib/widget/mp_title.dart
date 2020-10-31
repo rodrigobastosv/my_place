@@ -10,7 +10,7 @@ class MPTitle extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        fontSize: 28,
+        fontSize: 26,
         fontWeight: FontWeight.bold,
       ),
     );

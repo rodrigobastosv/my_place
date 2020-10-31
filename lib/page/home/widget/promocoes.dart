@@ -1,7 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:my_place/model/promocao_model.dart';
-import 'package:my_place/widget/mp_title.dart';
+
+import '../../../model/promocao_model.dart';
+import '../../../widget/mp_title.dart';
 
 class Promocoes extends StatelessWidget {
   Promocoes(this.promocoes);
