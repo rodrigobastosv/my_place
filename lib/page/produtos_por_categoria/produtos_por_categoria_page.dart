@@ -9,6 +9,8 @@ import 'package:my_place/widget/mp_list_tile.dart';
 import 'package:my_place/widget/mp_loading.dart';
 import 'package:provider/provider.dart';
 
+import 'produto_page.dart';
+
 class ProdutosPorCategoriaPage extends StatefulWidget {
   ProdutosPorCategoriaPage(this.categoria);
 
@@ -50,44 +52,24 @@ class _ProdutosPorCategoriaPageState extends State<ProdutosPorCategoriaPage> {
             final produtos = snapshot.data;
             return ListView.builder(
               itemBuilder: (_, i) => MPListTile(
-                leading: CircleAvatar(
-                  backgroundImage: NetworkImage(produtos[i].urlImagem),
+                leading: Hero(
+                  tag: produtos[i].urlImagem,
+                  child: CircleAvatar(
+                    backgroundImage: NetworkImage(produtos[i].urlImagem),
+                  ),
                 ),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: 30,
-                      height: 30,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Theme.of(context).primaryColorLight,
-                        ),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Text('0'),
-                    ),
-                    const SizedBox(width: 4),
-                    MPButtonIcon(
-                      iconData: Icons.remove,
-                      iconColor: Theme.of(context).primaryColor,
-                      withBackgroundColor: true,
-                      size: 30,
-                      onTap: () {},
-                    ),
-                    const SizedBox(width: 4),
-                    MPButtonIcon(
-                      iconData: Icons.add,
-                      iconColor: Theme.of(context).primaryColor,
-                      withBackgroundColor: true,
-                      size: 30,
-                      onTap: () =>
-                          _carrinhoController.adicionaProduto(produtos[i]),
-                    ),
-                  ],
-                ),
+                trailing: Text(produtos[i].preco.toString()),
                 title: Text(produtos[i].nome),
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => Provider.value(
+                          value: Provider.of<CarrinhoController>(context),
+                          child: ProdutoPage(produtos[i]),
+                        ),
+                      ),
+                    );
+                },
               ),
               itemCount: produtos.length,
             );

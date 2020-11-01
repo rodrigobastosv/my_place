@@ -12,14 +12,25 @@ class CarrinhoController {
     final querySnapshot =
         await _carrinhosRef.doc(user.id).collection('produtos').get();
     return querySnapshot.docs
-        .map((doc) => ProdutoModel.fromJson(doc.id, doc.data())).toList();
+        .map((doc) => ProdutoModel.fromJson(doc.id, doc.data()))
+        .toList();
   }
 
   Future<void> adicionaProduto(ProdutoModel produto) async {
-    await _carrinhosRef
-        .doc(user.id)
-        .collection('produtos')
-        .doc(produto.id)
-        .set(produto.toJson());
+    final doc =
+        _carrinhosRef.doc(user.id).collection('produtos').doc(produto.id);
+    final docSnapshot = await doc.get();
+    if (docSnapshot.exists) {
+      final quantidade = docSnapshot.data()['quantidade'] ?? 0;
+      doc.set({
+        ...produto.toJson(),
+        'quantidade': quantidade + 1,
+      });
+    } else {
+      doc.set({
+        ...produto.toJson(),
+        'quantidade': 1,
+      });
+    }
   }
 }

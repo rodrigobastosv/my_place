@@ -55,7 +55,8 @@ class _CarrinhoPageState extends State<CarrinhoPage> {
                         ),
                         borderRadius: BorderRadius.circular(15),
                       ),
-                      child: Text('0'),
+                      child: Text(
+                          produtosCarrinho[i].quantidade?.toString() ?? '0'),
                     ),
                     const SizedBox(width: 4),
                     MPButtonIcon(
@@ -67,13 +68,16 @@ class _CarrinhoPageState extends State<CarrinhoPage> {
                     ),
                     const SizedBox(width: 4),
                     MPButtonIcon(
-                      iconData: Icons.add,
-                      iconColor: Theme.of(context).primaryColor,
-                      withBackgroundColor: true,
-                      size: 30,
-                      onTap: () =>
-                          _controller.adicionaProduto(produtosCarrinho[i]),
-                    ),
+                        iconData: Icons.add,
+                        iconColor: Theme.of(context).primaryColor,
+                        withBackgroundColor: true,
+                        size: 30,
+                        onTap: () async {
+                          await _controller
+                              .adicionaProduto(produtosCarrinho[i]);
+                          futureCarrinho = _controller.getProdutosCarrinho();
+                          setState(() {});
+                        }),
                   ],
                 ),
               ),

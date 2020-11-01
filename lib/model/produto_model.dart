@@ -5,6 +5,7 @@ class ProdutoModel {
   String categoria;
   String urlImagem;
   String preco;
+  int quantidade;
 
   ProdutoModel({
     this.nome,
@@ -12,6 +13,7 @@ class ProdutoModel {
     this.categoria,
     this.urlImagem,
     this.preco,
+    this.quantidade,
   });
 
   ProdutoModel.fromJson(String docId, Map<String, dynamic> json) {
@@ -21,6 +23,7 @@ class ProdutoModel {
     categoria = json['categoria'];
     urlImagem = json['urlImagem'];
     preco = json['preco'];
+    quantidade = json['quantidade'];
   }
 
   Map<String, dynamic> toJson() {
@@ -30,6 +33,7 @@ class ProdutoModel {
     data['categoria'] = this.categoria;
     data['urlImagem'] = this.urlImagem;
     data['preco'] = this.preco;
+    data['quantidade'] = this.quantidade;
     return data;
   }
 }
