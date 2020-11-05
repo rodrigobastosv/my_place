@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../model/categoria_model.dart';
-import '../../model/promocao_model.dart';
-import '../../model/usuario_model.dart';
+import 'package:my_place_models/models/models.dart';
 import '../../widget/mp_appbar.dart';
 import '../../widget/mp_button_icon.dart';
 import '../../widget/mp_loading.dart';

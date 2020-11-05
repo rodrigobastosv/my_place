@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_place/exceptions/exceptions.dart';
-import 'package:my_place/model/usuario_model.dart';
 import 'package:my_place/page/carrinho/carrinho_controller.dart';
 import 'package:my_place/page/home/home_page.dart';
 import 'package:my_place/widget/mp_loading.dart';
+import 'package:my_place_models/models/models.dart';
 import 'package:provider/provider.dart';
 
 import '../../exceptions/exceptions.dart';

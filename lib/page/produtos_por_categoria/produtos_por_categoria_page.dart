@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_place/model/categoria_model.dart';
-import 'package:my_place/model/produto_model.dart';
+import 'package:my_place_models/models/models.dart';
 import 'package:my_place/page/carrinho/carrinho_controller.dart';
 import 'package:my_place/page/produtos_por_categoria/produtos_por_categoria_controller.dart';
 import 'package:my_place/widget/mp_appbar.dart';
-import 'package:my_place/widget/mp_button_icon.dart';
 import 'package:my_place/widget/mp_list_tile.dart';
 import 'package:my_place/widget/mp_loading.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +21,6 @@ class ProdutosPorCategoriaPage extends StatefulWidget {
 
 class _ProdutosPorCategoriaPageState extends State<ProdutosPorCategoriaPage> {
   ProdutosPorCategoriaController _controller;
-  CarrinhoController _carrinhoController;
   Future<List<ProdutoModel>> futureProdutos;
 
   @override
@@ -35,7 +32,6 @@ class _ProdutosPorCategoriaPageState extends State<ProdutosPorCategoriaPage> {
 
   @override
   void didChangeDependencies() {
-    _carrinhoController = Provider.of<CarrinhoController>(context);
     super.didChangeDependencies();
   }
 
@@ -62,13 +58,13 @@ class _ProdutosPorCategoriaPageState extends State<ProdutosPorCategoriaPage> {
                 title: Text(produtos[i].nome),
                 onTap: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => Provider.value(
-                          value: Provider.of<CarrinhoController>(context),
-                          child: ProdutoPage(produtos[i]),
-                        ),
+                    MaterialPageRoute(
+                      builder: (_) => Provider.value(
+                        value: Provider.of<CarrinhoController>(context),
+                        child: ProdutoPage(produtos[i]),
                       ),
-                    );
+                    ),
+                  );
                 },
               ),
               itemCount: produtos.length,
