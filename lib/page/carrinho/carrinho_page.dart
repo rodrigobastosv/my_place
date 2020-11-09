@@ -127,7 +127,10 @@ class _CarrinhoPageState extends State<CarrinhoPage> {
                             await _controller.finalizaPedido();
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (_) => HomePage(),
+                                builder: (_) => Provider.value(
+                                  value: _controller.user,
+                                  child: HomePage(),
+                                ),
                               ),
                             );
                           },
