@@ -54,7 +54,29 @@ class _ProdutosPorCategoriaPageState extends State<ProdutosPorCategoriaPage> {
                     backgroundImage: NetworkImage(produtos[i].urlImagem),
                   ),
                 ),
-                trailing: Text(produtos[i].preco.toString()),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      produtos[i].preco.toString(),
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.green,
+                      ),
+                    ),
+                    Container(
+                      width: 16,
+                      child: Icon(
+                        Icons.chevron_right,
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onSurface
+                            .withOpacity(.2),
+                      ),
+                    ),
+                  ],
+                ),
                 title: Text(produtos[i].nome),
                 onTap: () {
                   Navigator.of(context).push(

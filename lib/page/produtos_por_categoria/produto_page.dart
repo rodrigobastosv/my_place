@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_place/widget/mp_appbar.dart';
 import 'package:my_place_models/models/models.dart';
 import 'package:my_place/page/carrinho/carrinho_controller.dart';
 import 'package:provider/provider.dart';
@@ -24,26 +25,45 @@ class _ProdutoPageState extends State<ProdutoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Hero(
-            tag: widget.produto.urlImagem,
-            child: CircleAvatar(
-              backgroundImage: NetworkImage(widget.produto.urlImagem),
-              radius: 80,
+      appBar: MPAppBar(
+        title: Text('Produto'),
+      ),
+      body: Container(
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+        alignment: Alignment.center,
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Hero(
+                tag: widget.produto.urlImagem,
+                child: Image.network(widget.produto.urlImagem),
+              ),
             ),
-          ),
-          Text(widget.produto.preco),
-          Text(widget.produto.descricao),
-          RaisedButton(
-            onPressed: () async {
-              await _carrinhoController.adicionaProduto(widget.produto);
-            },
-            child: Text('Adicionar ao carrinho'),
-          ),
-        ],
+            const SizedBox(height: 16),
+            Text(
+              widget.produto.descricao,
+              style: TextStyle(fontSize: 18),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              widget.produto.preco,
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w500,
+                color: Colors.green,
+              ),
+            ),
+            const SizedBox(height: 12),
+            RaisedButton.icon(
+              label: Text('Adicionar ao carrinho'),
+              icon: Icon(Icons.add_shopping_cart),
+              onPressed: () async {
+                await _carrinhoController.adicionaProduto(widget.produto);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
