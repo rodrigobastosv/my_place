@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_place/exceptions/exceptions.dart';
 import 'package:my_place/page/carrinho/carrinho_controller.dart';
 import 'package:my_place/page/home/home_page.dart';
+import 'package:my_place_utils/my_place_utils.dart';
 import 'package:my_place/widget/mp_loading.dart';
 import 'package:my_place_models/models/models.dart';
 import 'package:provider/provider.dart';
@@ -84,14 +85,25 @@ class _SignInPageState extends State<SignInPage> {
                                       builder: (_) => Provider<UsuarioModel>(
                                         create: (_) => usuario,
                                         child: Provider<CarrinhoController>(
-                                          create: (_) => CarrinhoController(usuario),
+                                          create: (_) =>
+                                              CarrinhoController(usuario),
                                           child: HomePage(),
                                         ),
                                       ),
                                     ),
                                     (Route<dynamic> route) => false,
                                   );
-                                } on UsuarioNaoEncontradoException {} on SenhaErradaException {} on EmailInvalidoException {} on ClienteInvalidoException {} on Exception {} finally {
+                                } on UsuarioNaoEncontradoException {
+                                  showWarningToast('Usuário não encontrado');
+                                } on SenhaErradaException {
+                                  showWarningToast('Senha inválida');
+                                } on EmailInvalidoException {
+                                  showWarningToast('Email inválido');
+                                } on ClienteInvalidoException {
+                                  showWarningToast('Este usuário não é cliente');
+                                } on Exception {
+                                  showErrorToast('Ocorreu um erro inesperado');
+                                } finally {
                                   setState(() {
                                     _controller.setIsLoading(false);
                                   });

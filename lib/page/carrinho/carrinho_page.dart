@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_place_utils/my_place_utils.dart';
 import 'package:my_place/widget/mp_logo.dart';
 import 'package:my_place_models/models/models.dart';
 import 'package:my_place/page/carrinho/carrinho_controller.dart';
@@ -130,6 +131,7 @@ class _CarrinhoPageState extends State<CarrinhoPage> {
                           onSubmitPressed: (int avaliacao) async {
                             _controller.onChangeAvaliacaoPedido(avaliacao);
                             await _controller.finalizaPedido();
+                            showSuccessToast('Pedido finalizado com sucesso!');
                             Navigator.of(context).pop();
                           },
                         );

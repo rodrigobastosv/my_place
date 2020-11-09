@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_place_utils/my_place_utils.dart';
 import 'package:my_place/widget/mp_appbar.dart';
 import 'package:my_place_models/models/models.dart';
 import 'package:my_place/page/carrinho/carrinho_controller.dart';
@@ -60,6 +61,7 @@ class _ProdutoPageState extends State<ProdutoPage> {
               icon: Icon(Icons.add_shopping_cart),
               onPressed: () async {
                 await _carrinhoController.adicionaProduto(widget.produto);
+                showSuccessToast('Produto adicionado ao carrinho!');
               },
             ),
           ],

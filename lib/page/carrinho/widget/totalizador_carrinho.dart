@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_place/util/preco_utils.dart';
+import 'package:my_place_utils/my_place_utils.dart';
 import 'package:my_place_models/models/models.dart';
 
 class TotalizadorCarrinho extends StatelessWidget {
