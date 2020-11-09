@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 class MPListTile extends StatelessWidget {
   final Widget leading;
   final Widget title;
+  final Widget subtitle;
   final Widget trailing;
   final Function onTap;
 
   const MPListTile({
     this.leading,
     this.title,
+    this.subtitle,
     this.trailing,
     this.onTap,
   });
@@ -27,6 +29,7 @@ class MPListTile extends StatelessWidget {
                 child: leading,
               ),
         title: title,
+        subtitle: subtitle,
         trailing: trailing ??
             Container(
               width: 16,

@@ -33,6 +33,7 @@ dependencies:
   flutter_masked_text: ^0.8.0
   carousel_slider: ^2.3.1
   provider: ^4.3.2+2
+  rating_dialog: ^1.0.0
 
   my_place_models:
     path: ../my_place_models
