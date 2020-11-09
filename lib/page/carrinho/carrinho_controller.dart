@@ -13,15 +13,12 @@ class CarrinhoController {
       FirebaseFirestore.instance.collection('pedidos_nao_processados');
 
   Future<List<ProdutoModel>> getProdutosCarrinho() async {
-    final carrinhoRef = await _carrinhosRef.doc(user.id).get();
-    if (carrinhoRef.exists) {
-      final querySnapshot =
-          await _carrinhosRef.doc(user.id).collection('produtos').get();
-      return querySnapshot.docs
-          .map((doc) => ProdutoModel.fromJson(doc.id, doc.data()))
-          .toList();
-    }
-    return [];
+    await _carrinhosRef.doc(user.id).get();
+    final querySnapshot =
+        await _carrinhosRef.doc(user.id).collection('produtos').get();
+    return querySnapshot.docs
+        .map((doc) => ProdutoModel.fromJson(doc.id, doc.data()))
+        .toList();
   }
 
   Future<void> adicionaProduto(ProdutoModel produto) async {
@@ -66,7 +63,17 @@ class CarrinhoController {
     pedido.valorPedido = valorPedido;
     pedido.userId = user.id;
     pedido.nomeUsuario = user.nome;
-    await _carrinhosRef.doc(user.id).delete();
+
+    await deleteCarrinho();
     await _pedidosNaoProcessadosRef.add(pedido.toJson());
+  }
+
+  Future<void> deleteCarrinho() async {
+    await _carrinhosRef.doc(user.id).delete();
+    final produtosCarrinho =
+        await _carrinhosRef.doc(user.id).collection('produtos').get();
+    produtosCarrinho.docs.forEach((doc) {
+      _carrinhosRef.doc(user.id).collection('produtos').doc(doc.id).delete();
+    });
   }
 }

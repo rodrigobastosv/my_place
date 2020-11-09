@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_place/page/home/home_page.dart';
 import 'package:my_place/widget/mp_logo.dart';
 import 'package:my_place_models/models/models.dart';
 import 'package:my_place/page/carrinho/carrinho_controller.dart';
@@ -125,14 +124,7 @@ class _CarrinhoPageState extends State<CarrinhoPage> {
                           onSubmitPressed: (int avaliacao) async {
                             _controller.onChangeAvaliacaoPedido(avaliacao);
                             await _controller.finalizaPedido();
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (_) => Provider.value(
-                                  value: _controller.user,
-                                  child: HomePage(),
-                                ),
-                              ),
-                            );
+                            Navigator.of(context).pop();
                           },
                         );
                       },
