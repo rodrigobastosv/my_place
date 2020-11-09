@@ -39,6 +39,21 @@ class CarrinhoController {
     }
   }
 
+  Future<void> removeProduto(ProdutoModel produto) async {
+    final doc =
+        _carrinhosRef.doc(user.id).collection('produtos').doc(produto.id);
+    final docSnapshot = await doc.get();
+    final quantidade = docSnapshot.data()['quantidade'] ?? 0;
+    if (quantidade == 1) {
+      await doc.delete();
+    } else {
+      doc.set({
+        ...produto.toJson(),
+        'quantidade': quantidade - 1,
+      });
+    }
+  }
+
   double getValorTotalPedido(List<ProdutoModel> produtos) {
     double valor = 0.0;
     for (ProdutoModel produto in produtos) {

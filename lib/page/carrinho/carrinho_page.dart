@@ -72,7 +72,13 @@ class _CarrinhoPageState extends State<CarrinhoPage> {
                           iconColor: Theme.of(context).primaryColor,
                           withBackgroundColor: true,
                           size: 30,
-                          onTap: () {},
+                          onTap: () async {
+                            await _controller
+                                  .removeProduto(produtosCarrinho[i]);
+                              futureCarrinho =
+                                  _controller.getProdutosCarrinho();
+                              setState(() {});
+                          },
                         ),
                         const SizedBox(width: 4),
                         MPButtonIcon(
