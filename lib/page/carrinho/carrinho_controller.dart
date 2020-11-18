@@ -9,8 +9,8 @@ class CarrinhoController {
   final PedidoModel pedido;
   final UsuarioModel user;
   final _carrinhosRef = FirebaseFirestore.instance.collection('carrinhos');
-  final _pedidosNaoProcessadosRef =
-      FirebaseFirestore.instance.collection('pedidos_nao_processados');
+  final _pedidosPendentesRef =
+      FirebaseFirestore.instance.collection('pedidos_pendentes');
 
   Future<List<ProdutoModel>> getProdutosCarrinho() async {
     await _carrinhosRef.doc(user.id).get();
@@ -78,9 +78,10 @@ class CarrinhoController {
     pedido.valorPedido = valorPedido;
     pedido.userId = user.id;
     pedido.nomeUsuario = user.nome;
+    pedido.dataPedido = DateTime.now();
 
     await deleteCarrinho();
-    await _pedidosNaoProcessadosRef.add(pedido.toJson());
+    await _pedidosPendentesRef.add(pedido.toJson());
   }
 
   Future<void> deleteCarrinho() async {
