@@ -153,29 +153,35 @@ class _CarrinhoPageState extends State<CarrinhoPage> {
                           horizontal: 32,
                         ),
                         onPressed: () async {
-                          showDialog(
-                            context: context,
-                            barrierDismissible: false,
-                            builder: (_) {
-                              return RatingDialog(
-                                icon: MPLogo(),
-                                title: 'Dê uma nota para a sua experiência!',
-                                description: '',
-                                submitButton: "ENVIAR",
-                                positiveComment: 'Que ótimo!',
-                                negativeComment: 'Que pena :(',
-                                accentColor: Theme.of(context).primaryColor,
-                                onSubmitPressed: (int avaliacao) async {
-                                  _controller
-                                      .onChangeAvaliacaoPedido(avaliacao);
-                                  await _controller.finalizaPedido();
-                                  showSuccessToast(
-                                      'Pedido finalizado com sucesso!');
-                                  Navigator.of(context).pop();
-                                },
-                              );
-                            },
-                          );
+                          final pedidoFinalizado =
+                              await _controller.finalizaPedido();
+                          if (pedidoFinalizado) {
+                            showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (_) {
+                                return RatingDialog(
+                                  icon: MPLogo(),
+                                  title: 'Dê uma nota para a sua experiência!',
+                                  description: '',
+                                  submitButton: "ENVIAR",
+                                  positiveComment: 'Que ótimo!',
+                                  negativeComment: 'Que pena :(',
+                                  accentColor: Theme.of(context).primaryColor,
+                                  onSubmitPressed: (int avaliacao) async {
+                                    _controller
+                                        .onChangeAvaliacaoPedido(avaliacao);
+                                    showSuccessToast(
+                                      'Pedido finalizado com sucesso!',
+                                    );
+                                    Navigator.of(context).pop();
+                                  },
+                                );
+                              },
+                            );
+                          } else {
+                            showWarningToast('Pedido está vazio!');
+                          }
                         },
                       ),
                       SizedBox(height: 16),

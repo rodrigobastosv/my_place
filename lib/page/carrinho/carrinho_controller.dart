@@ -71,17 +71,21 @@ class CarrinhoController {
     pedido.observacao = observacao;
   }
 
-  Future<void> finalizaPedido() async {
+  Future<bool> finalizaPedido() async {
     final produtosCarrinho = await getProdutosCarrinho();
-    final valorPedido = getValorTotalPedido(produtosCarrinho);
-    pedido.produtos = produtosCarrinho;
-    pedido.valorPedido = valorPedido;
-    pedido.userId = user.id;
-    pedido.nomeUsuario = user.nome;
-    pedido.dataPedido = DateTime.now();
+    if (produtosCarrinho.isNotEmpty) {
+      final valorPedido = getValorTotalPedido(produtosCarrinho);
+      pedido.produtos = produtosCarrinho;
+      pedido.valorPedido = valorPedido;
+      pedido.userId = user.id;
+      pedido.nomeUsuario = user.nome;
+      pedido.dataPedido = DateTime.now();
 
-    await deleteCarrinho();
-    await _pedidosPendentesRef.add(pedido.toJson());
+      await deleteCarrinho();
+      await _pedidosPendentesRef.add(pedido.toJson());
+      return true;
+    }
+    return false;
   }
 
   Future<void> deleteCarrinho() async {
