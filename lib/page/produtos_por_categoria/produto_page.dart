@@ -55,9 +55,18 @@ class _ProdutoPageState extends State<ProdutoPage> {
                 color: Colors.green,
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 24),
             RaisedButton.icon(
-              label: Text('Adicionar ao carrinho'),
+              padding: const EdgeInsets.symmetric(
+                vertical: 12,
+                horizontal: 24,
+              ),
+              label: Text(
+                'Adicionar ao carrinho',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
               icon: Icon(Icons.add_shopping_cart),
               onPressed: () async {
                 await _carrinhoController.adicionaProduto(widget.produto);

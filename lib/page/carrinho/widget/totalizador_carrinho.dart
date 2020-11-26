@@ -18,12 +18,35 @@ class TotalizadorCarrinho extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      itemBuilder: (_, i) => ListTile(
-        title: Text('${produtos[i].quantidade} x ${produtos[i].preco}'),
+    return Center(
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          vertical: 4,
+          horizontal: 16,
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: Theme.of(context).primaryColor.withOpacity(.1),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Total:',
+              style: TextStyle(fontSize: 18),
+            ),
+            SizedBox(width: 8),
+            Text(
+              PrecoUtils.numeroToPreco(getTotal().toString()),
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
-      separatorBuilder: (_, i) => Divider(),
-      itemCount: produtos.length,
     );
   }
 }

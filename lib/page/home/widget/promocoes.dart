@@ -49,25 +49,51 @@ class Promocoes extends StatelessWidget {
                         Image.network(
                           promocao.urlImagem,
                           fit: BoxFit.cover,
+                          width: double.maxFinite,
                         ),
                         Positioned(
-                          top: 6,
-                          right: 10,
+                          top: 0,
+                          right: 0,
                           child: Container(
-                            height: 40,
-                            width: 80,
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 4,
+                              horizontal: 16,
+                            ),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(10),
+                              ),
                               color: Colors.red[400],
                             ),
-                            child: Center(
-                              child: Text(
-                                '${promocao.desconto.toStringAsFixed(0)} % OFF',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              '${promocao.desconto.toStringAsFixed(0)}% OFF',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
                               ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 4,
+                              horizontal: 16,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(10),
+                              ),
+                              color: Theme.of(context).colorScheme.surface,
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              promocao.nomeProduto,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ),

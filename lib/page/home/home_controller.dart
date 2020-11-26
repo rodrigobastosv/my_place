@@ -33,7 +33,7 @@ class HomeController {
     final produto = ProdutoModel.fromJson(doc.id, doc.data());
     final preco =
         promocao.valorOriginalProduto * (1 - (promocao.desconto / 100));
-    produto.preco = PrecoUtils.precoToString(preco.toStringAsFixed(2));
+    produto.preco = PrecoUtils.numeroToPreco(preco.toString());
     return produto;
   }
 }

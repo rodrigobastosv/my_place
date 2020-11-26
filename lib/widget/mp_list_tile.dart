@@ -5,6 +5,7 @@ class MPListTile extends StatelessWidget {
   final Widget title;
   final Widget subtitle;
   final Widget trailing;
+  final bool hasTrailing;
   final Function onTap;
 
   const MPListTile({
@@ -12,6 +13,7 @@ class MPListTile extends StatelessWidget {
     this.title,
     this.subtitle,
     this.trailing,
+    this.hasTrailing = true,
     this.onTap,
   });
 
@@ -30,14 +32,17 @@ class MPListTile extends StatelessWidget {
               ),
         title: title,
         subtitle: subtitle,
-        trailing: trailing ??
-            Container(
-              width: 16,
-              child: Icon(
-                Icons.chevron_right,
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(.2),
-              ),
-            ),
+        trailing: hasTrailing
+            ? trailing ??
+                Container(
+                  width: 16,
+                  child: Icon(
+                    Icons.chevron_right,
+                    color:
+                        Theme.of(context).colorScheme.onSurface.withOpacity(.2),
+                  ),
+                )
+            : null,
         onTap: onTap,
       ),
     );

@@ -39,9 +39,35 @@ class Categorias extends StatelessWidget {
                   },
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      categoria.urlImagem,
-                      fit: BoxFit.cover,
+                    child: Stack(
+                      children: [
+                        Image.network(
+                          categoria.urlImagem,
+                          fit: BoxFit.cover,
+                          width: double.maxFinite,
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 4,
+                              horizontal: 16,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(10),
+                              ),
+                              color: Theme.of(context).colorScheme.surface,
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              categoria.nome,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

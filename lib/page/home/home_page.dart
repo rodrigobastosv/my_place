@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                   if (snapshot.hasData) {
                     return Promocoes(snapshot.data);
                   } else {
-                    return MPLoading();
+                    return SizedBox(height: 200, child: MPLoading());
                   }
                 },
               ),
@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                   if (snapshot.hasData) {
                     return Categorias(snapshot.data);
                   } else {
-                    return MPLoading();
+                    return SizedBox(height: 200, child: MPLoading());
                   }
                 },
               ),
